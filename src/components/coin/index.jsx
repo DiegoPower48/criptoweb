@@ -11,15 +11,12 @@ export default function Coin() {
 
   async function fetchData() {
     try {
-      const response = await fetch(
-        "https://backendmichu.onrender.com/webdata"
-      );
+      const response = await fetch("https://backendmichu.onrender.com/webdata");
       if (!response.ok) {
         throw new Error("Error en la solicitud: " + response.status);
       }
       const data = await response.json(); // Parsear JSON
       setData(data);
-      console.log(data);
       setLoading(false);
     } catch (error) {
       console.error("Error:", error); // Manejar errores
@@ -59,7 +56,10 @@ export default function Coin() {
     <div>
       <div>
         {loading ? (
-          <div className="h-screen flex mt-32 justify-center">
+          <div className="h-full flex mt-32 justify-center flex-col items-center">
+            <div className="h-20 text-3xl text-yellow-300 font-bold">
+              Loading...
+            </div>
             <MoonLoader color="white" />
           </div>
         ) : (
