@@ -12,7 +12,7 @@ export default function Coin() {
   async function fetchData() {
     try {
       const response = await fetch(
-        "https://portfolio-c4l9.onrender.com/webdata"
+        "https://backendmichu.onrender.com/webdata"
       );
       if (!response.ok) {
         throw new Error("Error en la solicitud: " + response.status);
