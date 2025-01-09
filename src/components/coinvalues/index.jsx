@@ -5,8 +5,14 @@ export default function CoinValues(prop) {
 
   return (
     <div>
-      <div className="  h-full rounded-lg border-2 border-gray-300 p-2  hover:scale-105 hover:border-yellow-200 hover:border-4">
-        <div className="h-28 ">Icono!!!!</div>
+      <div>
+        <div className=" flex items-center justify-center">
+          <img
+            className="border-2 rounded-full p-4 h-24 bg-yellow-300 text-black"
+            src={`/${name}.webp`}
+            alt={name}
+          />
+        </div>
 
         <div className="grid grid-cols-2 text-lg ">
           <div className="font-bold text-amber-600"> {name}</div>
