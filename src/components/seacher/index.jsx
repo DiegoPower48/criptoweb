@@ -9,11 +9,8 @@ export default function Searcher(props) {
   const [inputValue, setInputValue] = useState("");
 
   const onSubmit = (event) => {
-    event.preventDefault(); // Prevenir que el formulario recargue la página
-    console.log(datos);
-    console.log(inputValue); // Verificar el valor ingresado
+    event.preventDefault();
 
-    // Buscar el índice del elemento que contiene el valor ingresado
     const position = datos.findIndex((item) =>
       item[1].toLowerCase().includes(inputValue.toLowerCase())
     );
@@ -28,10 +25,10 @@ export default function Searcher(props) {
   };
 
   return (
-    <div className="md:h-96 w-full grid rounded-lg border-4  md:grid-cols-2  m-10 sm:grid-rows-2 grid-cols-1 h-full">
-      <div className="text-black">
+    <div className="md:h-96 w-full h-full  grid rounded-lg border-4  md:grid-cols-2  m-10 grid-rows-1 ">
+      <div className="text-black   content-center ">
         <form onSubmit={onSubmit}>
-          <div className="grid  md:grid-cols-1 px-10 h-96 content-center">
+          <div className="grid  md:grid-cols-1 md:p-10 p-6 ">
             <input
               className="border-2 h-10 rounded-lg border-yellow-300 text-center"
               type="text"
@@ -39,18 +36,21 @@ export default function Searcher(props) {
               onChange={(e) => setInputValue(e.target.value)}
             />
             <button
-              className="border-2 border-black h-10 p-1 rounded-lg font-bold bg-yellow-300 mt-7 active:bg-white active:scale-105 "
+              className="border-2 border-black h-10 p-1 rounded-lg font-bold bg-yellow-300 mt-7 active:bg-white active:scale-105 hover:bg-red-400 hover:scale-105"
               type="submit"
             >
-              Buscar
+              Search
             </button>
           </div>
         </form>
       </div>
       {!lastSearch ? (
-        <div></div>
+        <></>
       ) : (
-        <div className=" p-5 h-96 text-center">
+        <div
+          className=" h-full  p-7  md:border-white
+        border-yellow-300 md:border-l-2 md:border-t-0 border-t-2"
+        >
           <CoinValues
             name={searched[1]}
             icon={searched[2]}
