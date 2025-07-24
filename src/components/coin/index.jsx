@@ -8,7 +8,7 @@ export default function Coin() {
 
   async function fetchData() {
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/scrapper`);
       if (!response.ok) {
         throw new Error("Error en la solicitud: " + response.status);
       }
