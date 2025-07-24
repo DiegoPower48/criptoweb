@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import CoinValues from "../coinvalues";
 
 export default function Searcher(props) {
@@ -12,7 +12,7 @@ export default function Searcher(props) {
     event.preventDefault();
 
     const position = datos.findIndex((item) =>
-      item[1].toLowerCase().includes(inputValue.toLowerCase())
+      item.name.toLowerCase().includes(inputValue.toLowerCase())
     );
 
     if (position !== -1) {
@@ -25,7 +25,7 @@ export default function Searcher(props) {
   };
 
   return (
-    <div className="md:h-96 w-full h-full  grid rounded-lg border-4  md:grid-cols-2  m-10 grid-rows-1 ">
+    <div className="w-full h-full min-h-96  grid rounded-lg border-4  md:grid-cols-2  m-10 grid-rows-1 ">
       <div className="text-black   content-center ">
         <form onSubmit={onSubmit}>
           <div className="grid  md:grid-cols-1 md:p-10 p-6 ">
@@ -36,7 +36,7 @@ export default function Searcher(props) {
               onChange={(e) => setInputValue(e.target.value)}
             />
             <button
-              className="border-2 border-black h-10 p-1 rounded-lg font-bold bg-yellow-300 mt-7 active:bg-white active:scale-105 hover:bg-red-400 hover:scale-105"
+              className="border-2 transition-all duration-300 border-black h-10 p-1 rounded-lg font-bold bg-yellow-300 mt-7 active:bg-white active:scale-105 hover:bg-red-400 hover:scale-105"
               type="submit"
             >
               Search
@@ -47,17 +47,14 @@ export default function Searcher(props) {
       {!lastSearch ? (
         <></>
       ) : (
-        <div
-          className=" h-full  p-7  md:border-white
-        border-yellow-300 md:border-l-2 md:border-t-0 border-t-2"
-        >
+        <div className="p-4 md:border-l-2 md:border-t-0 border-t-2  border-white h-full grid grid-cols-1 grid-rows-[2fr_1fr] place-content-center gap-4">
           <CoinValues
-            name={searched[1]}
-            icon={searched[2]}
-            price={searched[3]}
-            hour={searched[4]}
-            day={searched[5]}
-            week={searched[6]}
+            name={searched.name}
+            icon={searched.symbol}
+            price={searched.price}
+            hour={searched.change1h}
+            day={searched.change24h}
+            week={searched.change7d}
           />
         </div>
       )}

@@ -5,17 +5,16 @@ import Searcher from "../seacher";
 
 export default function Coin() {
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   async function fetchData() {
     try {
-      const response = await fetch("https://backendmichu.onrender.com/webdata");
+      const response = await fetch(import.meta.env.VITE_API_URL);
       if (!response.ok) {
         throw new Error("Error en la solicitud: " + response.status);
       }
       const data = await response.json();
+      console.log(data);
       setData(data);
-      setLoading(false);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -23,18 +22,12 @@ export default function Coin() {
 
   useEffect(() => {
     fetchData();
-
-    const interval = setInterval(() => {
-      fetchData();
-    }, 60000);
-
-    return () => clearInterval(interval);
   }, []);
 
   return (
     <div>
       <div>
-        {loading ? (
+        {!data ? (
           <div className="h-full flex mt-32 justify-center flex-col items-center">
             <div className="h-20 text-3xl text-yellow-300 font-bold">
               Loading...
@@ -42,24 +35,24 @@ export default function Coin() {
             <MoonLoader color="white" />
           </div>
         ) : (
-          <div>
+          <div className="h-full w-full">
             <div className="w-full flex justify-center">
               <Searcher datos={data} />
             </div>
-            <div className="grid lg:grid-cols-4 gap-10 p-10 md:grid-cols-3 sm:grid-cols-2">
+            <div className="grid lg:grid-cols-4 gap-10 p-10 md:grid-cols-3 sm:grid-cols-2 overflow-hidden h-full">
               {data.map((e, i) => (
                 <div
                   key={i}
-                  className=" h-full rounded-lg border-2 border-gray-300 p-2  hover:scale-105 hover:border-yellow-200 hover:border-4"
+                  className="transform duration-200 h-full rounded-lg border-2 border-gray-300 p-2  hover:border-yellow-200  hover:scale-105  grid grid-cols-1 grid-rows-[2fr_1fr] place-content-center gap-4 overflow-hidden  "
                 >
                   <CoinValues
-                    name={e[1]}
-                    icon={e[2]}
-                    price={e[3]}
-                    hour={e[4]}
-                    day={e[5]}
-                    week={e[6]}
-                  />{" "}
+                    name={e.name}
+                    icon={e.symbol}
+                    price={e.price}
+                    hour={e.change1h}
+                    day={e.change24h}
+                    week={e.change7d}
+                  />
                 </div>
               ))}
             </div>
